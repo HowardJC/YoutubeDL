@@ -16,5 +16,4 @@ func GetRequest(url string) (body []byte, err error) {
 
 	body, err = ioutil.ReadAll(r.Body)
 	return body, nil
-
 }
