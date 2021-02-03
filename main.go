@@ -30,7 +30,7 @@ func Download(Folder string, mu sync.Mutex) error {
 	file, err := os.Create(filename)
 	_, err = file.Write(body)
 	if err != nil {
-		return errors.New("Error writing")
+		return errors.New("Error writings")
 	}
 	return nil
 
