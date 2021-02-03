@@ -9,9 +9,14 @@ import (
 	"sync"
 )
 
-func Download(Folder string, mu sync.Mutex) error {
+type VideoContext struct {
+	error error
+	data  []byte
+}
+
+func (v VideoContext) Download(Folder string, mu sync.Mutex) error {
 	//TODO: make seperate struct/function to create the directorylist and do cleaning for the names also take the 2 minutes to choose a url and not have a dummy
-	body, err := HTTP.GetRequest("https://www.youtube.com/watch?v=UATNrUebey0&list=RDMM&index=16")
+	body, err := HTTP.GetRequest("https://www.youtube.com/watch?v=C0DPdy98e4c")
 	if err != nil {
 		return nil
 	}
@@ -29,9 +34,14 @@ func Download(Folder string, mu sync.Mutex) error {
 	mu.Unlock()
 	file, err := os.Create(filename)
 	_, err = file.Write(body)
+	v.data = body
 	if err != nil {
 		return errors.New("Error writings")
 	}
 	return nil
+}
+
+func (v VideoContext) VideoMetadata() {
+	println(v.data)
 
 }
