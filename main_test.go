@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"github.com/knadh/go-get-youtube/youtube"
 	"net/url"
 	"sync"
@@ -50,4 +51,13 @@ func TestVideo(t *testing.T) {
 		t.Error("status does not exist?")
 	}
 
+	player := parsed.Get("player_response")
+	if player == "" {
+		t.Error("Does not exist")
+	}
+	var Clown responseInfo
+	println(player)
+	json.Unmarshal([]byte(player), &Clown)
+
+	println(Clown.DashManifestURL)
 }
