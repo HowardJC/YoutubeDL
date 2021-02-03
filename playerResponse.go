@@ -1,10 +1,6 @@
 package main
 
-type responseInfo struct {
-	streamingData struct {
-		expiresInSeconds string `json:"responseContext"`
-	}
-	cards struct {
-		trackingParams string
-	}
+type streamingData struct {
+	expiresInSeconds string `json:"expiresInSeconds"`
+	format           map[string]string
 }

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/knadh/go-get-youtube/youtube"
+	"github.com/valyala/fastjson"
 	"net/url"
 	"sync"
 	"testing"
@@ -61,16 +62,13 @@ func TestVideo(t *testing.T) {
 
 	println("Hey")
 	println(player)
-	var Clown responseInfo
 	println(player)
 	//if err:=json.Unmarshal([]byte(player), &Clown); err!=nil{
 	//	t.Error("Unmarshal error?")
 	//}
-	//youtube json changes?
-	json.Unmarshal([]byte(player), &Clown)
-	var result map[string]interface{}
-	json.Unmarshal([]byte(player), &result)
-	birds := result["streamingData"]
-	fmt.Println(birds)
+	//youtube json changes and too long?
+	var p fastjson.Parser
+	Parsed, _ := p.Parse(v.urlMeta)
+	fmt.Println(Parsed)
 
 }
