@@ -40,15 +40,14 @@ func TestVideo(t *testing.T) {
 	v := VideoContext{}
 	c := sync.Mutex{}
 	v.Download("music", c)
-	parsed, err := url.ParseQuery(string(v.data))
+
+	parsed, err := url.ParseQuery(v.urlMeta)
 	if err != nil {
 		t.Error(err)
 	}
 	status := parsed.Get("status")
 	if status != "ok" {
-		t.Error("Broken")
+		t.Error("status does not exist?")
 	}
-	println(status)
-	println("Hey")
 
 }
