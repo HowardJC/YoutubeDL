@@ -1,5 +1,5 @@
-package main
+package VideoRetrieval
 
-func main() {
-
+type Video struct {
+	ID string
 }

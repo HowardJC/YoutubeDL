@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/knadh/go-get-youtube/youtube"
 	"net/url"
 	"sync"
@@ -43,6 +44,8 @@ func TestVideo(t *testing.T) {
 	v.Download("music", c)
 
 	parsed, err := url.ParseQuery(v.urlMeta)
+	parsedtest, _ := url.Parse(v.urlMeta)
+	println(parsedtest.Query().Get("status"))
 	if err != nil {
 		t.Error(err)
 	}
@@ -55,9 +58,19 @@ func TestVideo(t *testing.T) {
 	if player == "" {
 		t.Error("Does not exist")
 	}
+
+	println("Hey")
+	println(player)
 	var Clown responseInfo
 	println(player)
+	//if err:=json.Unmarshal([]byte(player), &Clown); err!=nil{
+	//	t.Error("Unmarshal error?")
+	//}
+	//youtube json changes?
 	json.Unmarshal([]byte(player), &Clown)
+	var result map[string]interface{}
+	json.Unmarshal([]byte(player), &result)
+	birds := result["streamingData"]
+	fmt.Println(birds)
 
-	println(Clown.DashManifestURL)
 }
